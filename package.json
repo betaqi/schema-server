@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=local nodemon index.js",
+    "beta": "cross-env NODE_ENV=beta nodemon index.js",
+    "prod": "cross-env NODE_ENV=prod node index.js"
+  },
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "axios": "^1.7.2",
+    "dayjs": "^1.11.18",
+    "generate-password": "^1.7.1",
+    "glob": "^11.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "2.4.0",
+    "koa": "^2.14.2",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^14.0.0",
+    "koa-static": "^5.0.0",
+    "koa-useragent": "^2.0.0",
+    "koa2-cors": "^2.0.6",
+    "lodash": "^4.17.21",
+    "log4js": "^6.9.1",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "node-schedule": "^2.1.1",
+    "superagent": "^8.1.2"
+  },
+  "devDependencies": {
+    "cross-env": "^10.0.0",
+    "nodemon": "^3.1.0"
+  }
+}
