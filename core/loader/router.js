@@ -23,12 +23,5 @@ module.exports = (app) => {
     }
   })
 
-  // HTML 兜底（前端路由）
-  router.get(/^(?!\/api).*/, async (ctx) => {
-    console.log('html');
-    ctx.status = 302;
-    ctx.redirect(app?.options?.homePage || '/');
-  });
-
   app.use(router.routes()).use(router.allowedMethods());
 }
