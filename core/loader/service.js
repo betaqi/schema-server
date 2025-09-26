@@ -27,8 +27,8 @@ module.exports = (app) => {
     for (let i = 0; i < length; i++) {
       const key = names[i]
       if (i === names.length - 1) {
-        const controllerModule = require(file)(app)
-        current[key] = new controllerModule;
+        const serverModule = require(file)(app)
+        current[key] = new serverModule;
       } else {
         if (!current[key]) {
           current[key] = {}

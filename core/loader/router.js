@@ -1,10 +1,6 @@
 const Router = require('koa-router')
-const cors = require('koa2-cors')
-const bodyParser = require('koa-bodyparser')
 const path = require('path');
 const glob = require('glob');
-
-const { sep } = path
 
 /*
   * Router loader
@@ -26,10 +22,13 @@ module.exports = (app) => {
       router.use(route.routes()).use(route.allowedMethods());
     }
   })
-  router.get(/(.*)/, async (ctx) => {
-    ctx.status = 302
-    ctx.redirect(app?.options?.homePage || '/')
-  })
+
+  // HTML 兜底（前端路由）
+  router.get(/^(?!\/api).*/, async (ctx) => {
+    console.log('html');
+    ctx.status = 302;
+    ctx.redirect(app?.options?.homePage || '/');
+  });
 
   app.use(router.routes()).use(router.allowedMethods());
 }

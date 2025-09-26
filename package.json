@@ -8,8 +8,8 @@
     "prod": "cross-env NODE_ENV=prod node index.js"
   },
   "dependencies": {
-    "ajv": "^6.10.2",
-    "axios": "^1.7.2",
+    "ajv": "^8.17.1",
+    "chalk": "^4.1.2",
     "dayjs": "^1.11.18",
     "generate-password": "^1.7.1",
     "glob": "^11.0.3",
@@ -17,19 +17,25 @@
     "knex": "2.4.0",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.1",
+    "koa-nunjucks-2": "^3.0.2",
     "koa-router": "^14.0.0",
     "koa-static": "^5.0.0",
     "koa-useragent": "^2.0.0",
     "koa2-cors": "^2.0.6",
     "lodash": "^4.17.21",
     "log4js": "^6.9.1",
-    "md5": "^2.3.0",
     "mysql": "^2.18.1",
+    "nanoid": "^3.3.11",
     "node-schedule": "^2.1.1",
     "superagent": "^8.1.2"
   },
   "devDependencies": {
+    "@types/koa": "^3.0.0",
+    "@types/koa-router": "^7.4.8",
+    "@types/node": "^24.5.2",
     "cross-env": "^10.0.0",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }

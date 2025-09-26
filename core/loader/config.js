@@ -21,7 +21,7 @@ module.exports = (app) => {
     throw new Error(`[catch-exception] no default config file found in ${ configPath }`);
   }
 
-  const currentEnv = app.env.getEnv()
+  const currentEnv = app.envFn.getEnv()
   let currentConfig = {}
   try {
     currentConfig = require(path.resolve(configPath, `${ folderName }.${ currentEnv }.js`))

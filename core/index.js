@@ -1,6 +1,6 @@
 const path = require('path')
 const Koa = require('koa')
-
+const chalk = require("chalk");
 const evn = require('./env')
 
 const controllerLoader = require('./loader/controller')
@@ -29,14 +29,14 @@ module.exports = {
 
     app.businessPath = path.resolve(app.baseDir, 'app') // 业务代码目录
 
-    app.env = evn()
-    console.log(`--- 👀 当前启动环境 【${ app.env.getEnv() }】 ---`)
+    app.envFn = evn()
+    app.env = app.envFn.getEnv()
 
     // 按照顺序加载中间件、路由、服务等
     app.middlewares = middlewareLoader(app) // 加载中间件
     app.routerSchema = routerSchemaLoader(app) // 加载路由校验
-    app.controller = controllerLoader(app) // 加载 controller
     app.service = serviceLoader(app) // 加载 service
+    app.controller = controllerLoader(app) // 加载 controller
     app.config = configLoader(app) // 加载配置
     extendLoader(app) // 加载扩展
     // scheduleLoader(app) // 加载定时任务
@@ -53,7 +53,7 @@ module.exports = {
     const host = process.env.HOST || 'localhost'
 
     app.listen(port, host, () => {
-      console.log(`🚀 Koa server running at http://${ host }:${ port }`)
+      console.log(chalk.greenBright('Koa server running at'),`http://${host}:${port}`);
     })
   }
 }
