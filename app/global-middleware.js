@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const cors = require('koa2-cors');
 const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');

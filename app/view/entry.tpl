@@ -5,8 +5,9 @@
     <title>{{ name }}</title>
 </head>
 <body>
-    <h1>page</h1>
-    {{ env }}
-    {{ name }}
+<div id="root"></div>
+<h1>page</h1>
+{{ env }}
+{{ name }}
 </body>
 </html>
