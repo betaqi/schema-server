@@ -4,7 +4,7 @@ import utils from "../../common/utils"
 export default function MyApp() {
   return (
     <div>
-      <h1>HMR122313</h1>
+      <h1>2123</h1>
       <MyButton/>
     </div>
   );
@@ -12,7 +12,7 @@ export default function MyApp() {
 
 function MyButton() {
   const [count, setCount] = useState(0);
-
+  console.log(count)
   function handleClick() {
     setCount(count + 1);
   }
