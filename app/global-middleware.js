@@ -9,7 +9,7 @@ module.exports = (app) => {
 
   // 模版渲染引擎
   app.use(koaNunjucks({
-    ext: 'tpl',
+    ext: 'html',
     path: path.resolve(process.cwd(), './app/public'), // 指定视图目录
     nunjucksConfig: {
       noCache: true, // 是否开启缓存，开发阶段建议关闭

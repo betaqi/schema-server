@@ -4,22 +4,21 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const pageEntry = {}
 const HtmlWebpackPlugins = []
-const entryFileList = glob.sync(path.join(__dirname, '../../pages', '**', '*.js'))
-console.log('--entryFileList--', entryFileList)
+const entryFileList = glob.sync(path.join(__dirname, '../../pages/views', '**', '*.js'))
+
 entryFileList.forEach(file => {
   const entryName = path.basename(file, '.js');
   pageEntry[entryName] = path.resolve(file)
 
   const htmlWebpackConfig = {
     // 产物 （最终模板） 输出路径
-    filename: path.resolve(__dirname, '../../public/dist', `${ entryName }.tpl`),
+    filename: path.resolve(__dirname, '../../public/dist', `${ entryName }.html`),
     // 指定要使用的模板文件
-    template: path.resolve(__dirname, '../../view/entry.tpl'),
+    template: path.resolve(__dirname, '../../view-template/entry.html'),
     // 要注入的代码块
     chunks: [entryName]
   }
 
-  console.log('--htmlWebpackConfig--', htmlWebpackConfig)
 
   HtmlWebpackPlugins.push(
     new HtmlWebpackPlugin(htmlWebpackConfig)
@@ -56,7 +55,7 @@ module.exports = {
           }
         },
         generator: {
-          filename: 'images/[name].[hash:8][ext]' // 输出目录和命名规则
+          filename: 'images/[name].[hash:8]' // 输出目录和命名规则
         }
       },
       {
@@ -67,7 +66,7 @@ module.exports = {
   },
   // 产物输出目录
   output: {
-    filename: 'js/[name].[hash:8][ext].bundle.js',
+    filename: 'js/[name].[hash:8].bundle.js',
     path: path.resolve(__dirname, '../../public/dist/prod'),
     publicPath: '/dist/prod/',
     crossOriginLoading: 'anonymous',
@@ -80,26 +79,44 @@ module.exports = {
     }
   },
   // 插件
-  plugins: [...HtmlWebpackPlugins
-    // 构造最终渲染的页面模板
-    // new HtmlWebpackPlugin({
-    //   // 产物 （最终模板） 输出路径
-    //   filename: path.resolve(__dirname, '../../public/dist', 'entry.page1.tpl'),
-    //   // 指定要使用的模板文件
-    //   template: path.resolve(__dirname, '../../view/entry.tpl'),
-    //   // 要注入的代码块
-    //   chunks: ['entry.page1']
-    // }),
-    // 构造最终渲染的页面模板
-    // new HtmlWebpackPlugin({
-    //     // 产物 （最终模板） 输出路径
-    //     filename: path.resolve(process.cwd(), './app/public/dist', 'entry.page2.html'),
-    //     // 指定要使用的模板文件
-    //     template: path.resolve(process.cwd(), './app/view/entry.html'),
-    //     // 要注入的代码块
-    //     chunks: ['entry.page2']
-    // })
-  ],
+  plugins: [...HtmlWebpackPlugins],
   // 配置打包输出优化(代码分割, 模块合并, 缓存, treeSharing, 压缩等优化策略)
-  optimization: {}
+  optimization: {
+    /*
+      * 把js 文件打包成3种类型
+      * 1.vendor： 第三方 Lib 库，基本不会改动，除非依赖版本升级
+      * 2.common：业务组件代码的公共部分抽取出来，改动较少
+      * 3. entry.{page｝：不用页面 entry 里的业务组件代码的差异部分，会经常改动
+    */
+    splitChunks: {
+      chunks: 'all', // 对同步和异步模块都进行切割
+      maxAsyncRequests: 6, // 每次异步加载的最大并行请求数
+      maxInitialRequests: 4, // 入口点的最大并行请求数
+      cacheGroups: {
+        reactVendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'react-vendor',
+          priority: 30,
+          enforce: true,
+        },
+        otherVendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          priority: 20,
+          // enforce: true, // 去掉，让它走正常 minSize 判断
+        },
+        common: {
+          name: 'common',
+          minSize: 20000, // 默认20kb，避免碎片化
+          minChunks: 2,   // 至少被两个入口引用才抽取
+          priority: 10,   // 高于 vendor，确保公共逻辑进 common
+          reuseExistingChunk: true,
+        }
+      }
+    },
+    // 将 webpack 运行时生产的代码打包到 runtime.js
+    runtimeChunk: {
+      name: entrypoint => `runtime~${ entrypoint.name }`
+    }
+  }
 }
