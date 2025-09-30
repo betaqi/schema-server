@@ -6,10 +6,10 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const pageEntry = {}
 const HtmlWebpackPlugins = []
-const entryFileList = glob.sync(path.join(__dirname, '../../pages/views', '**', '*.js'))
+const entryFileList = glob.sync(path.join(__dirname, '../../pages/views', '**', 'entry.main.js'))
 
 entryFileList.forEach(file => {
-  const entryName = path.basename(file, '.js');
+  const entryName = path.basename(path.dirname(file))
   pageEntry[entryName] = path.resolve(file)
 
   const htmlWebpackConfig = {
