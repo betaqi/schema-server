@@ -1,5 +1,6 @@
 const path = require("node:path");
 const glob = require("glob");
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -65,7 +66,10 @@ module.exports = {
     ...HtmlWebpackPlugins,
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css'
-    })
+    }),
+    new webpack.ProvidePlugin({
+      // axios: 'axios',
+    }),
   ], // 配置打包输出优化(代码分割, 模块合并, 缓存, treeSharing, 压缩等优化策略)
   optimization: {
     /*
