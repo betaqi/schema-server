@@ -10,6 +10,7 @@ const HtmlWebpackPlugins = []
 const entryFileList = glob.sync(path.join(__dirname, '../../pages/views', '**', 'entry.main.js'))
 
 entryFileList.forEach(file => {
+  //! 通过文件夹名称作为入口名称
   const entryName = path.basename(path.dirname(file))
   pageEntry[entryName] = path.resolve(file)
 

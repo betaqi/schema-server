@@ -3,7 +3,7 @@ module.exports = {
   name: '课程系统',
   desc: '',
   icon: '',
-  homepage: '',
+  homePage: '',
   menu: [
     {
       key: 'video',

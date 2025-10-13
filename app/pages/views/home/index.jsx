@@ -13,6 +13,7 @@ export default function TestApp() {
       params: {
         id: 1
       },
+      timeout: 0,
     })
     console.log(res.data)
   }
@@ -25,7 +26,7 @@ export default function TestApp() {
       <nav
         style={ { padding: '10px', borderBottom: '1px solid #ccc', backgroundColor: '#e8f5e8' } }>
         <h2>Home 应用</h2>
-        <Button onClick={loadData}>loadData</Button>
+        <Button onClick={ loadData }>loadData</Button>
       </nav>
       <main style={ { padding: '20px' } }>
         <Outlet/>

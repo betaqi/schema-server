@@ -3,7 +3,7 @@ module.exports = {
   name: '电商系统',
   desc: '',
   icon: '',
-  homepage: '',
+  homePage: '',
   menu: [
     {
       key: 'product',

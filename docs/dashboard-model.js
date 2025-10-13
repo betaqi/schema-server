@@ -18,7 +18,9 @@ module.exports = {
     moduleType: '', // 枚举值: sider/iframe/custom/schema
     // 当 moduleType 等于sider时
     siderConfig: {
-      menus: [{}]
+      menus: [{
+        // 可递归 menuItem
+      }]
     },
     // 当 moduleType 等于 iframe
     iframeConfig: {},

@@ -15,8 +15,11 @@ module.exports = {
           menuType: 'module',
           moduleType: 'custom',
           customConfig: {
-            path: '/todo'
+            path: '/todo',
           },
+          children: [
+            { key: '1', name: 'Option 1' }
+          ]
         },
         {
           key: 'excel',

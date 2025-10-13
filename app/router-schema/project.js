@@ -10,5 +10,10 @@ module.exports = {
         additionalProperties: false
       }
     }
+  },
+  '/api/project/model-list': {
+    GET: {
+
+    }
   }
 }
