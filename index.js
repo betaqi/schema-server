@@ -1,5 +1,7 @@
 const core = require('./core')
-core.start({
+;(async () => {
+  await core.start({
     name: 'koa-server',
     homePage: ''
-})
+  })
+})()
