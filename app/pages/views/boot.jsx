@@ -4,6 +4,7 @@ import { createHashRouter, RouterProvider } from 'react-router'
 import zhCN from 'antd/locale/zh_CN';
 import { ConfigProvider } from 'antd';
 import '@ant-design/v5-patch-for-react-19';
+import './index.css'
 
 
 export default (App, routers = []) => {

@@ -28,6 +28,9 @@ export default function TestApp() {
         <h2>Home 应用</h2>
         <Button onClick={ loadData }>loadData</Button>
       </nav>
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
       <main style={ { padding: '20px' } }>
         <Outlet/>
       </main>
